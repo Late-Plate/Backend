@@ -14,7 +14,9 @@ public class Recipe {
     @Column(length = 6500)
     private String instructions;
 
+    public Recipe(){
 
+    }
     public Recipe(String name, String ingredients, String instructions){
         this.name=name;
         this.ingredients=ingredients;

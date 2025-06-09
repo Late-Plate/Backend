@@ -26,16 +26,17 @@ public class RecipeService {
             // if no search term provided, return all recipes
             return recipeRepository.findAll(pageable);
         }
-        return recipeRepository.findNameContaing(name,pageable);
+        return recipeRepository.findNameContaining(name,pageable);
     }
 
 
-    public List<Recipe> searchRecipesbyIngredient(String ingredient) {
+    public Page<Recipe> searchRecipesbyIngredient(int page,int size,String ingredient) {
+        Pageable pageable = PageRequest.of(page,size,Sort.by("name").ascending());
         if (ingredient == null || ingredient.trim().isEmpty()) {
             // if no search term provided, return all recipes
-            return recipeRepository.findAll();
+            return recipeRepository.findAll(pageable);
         }
-        return recipeRepository.findByIngredientContaining(ingredient);
+        return recipeRepository.findByIngredientContaining(ingredient,pageable);
     }
     public Page<Recipe> searchRecipes(int page,int size,String term){
         Pageable pageable = PageRequest.of(page,size,Sort.by("name").ascending());

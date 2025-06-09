@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Service
+//@Service
 public class CSVLoaderService {
     private final RecipeRepository recipeRepository;
-    @Autowired
+    //@Autowired
     public CSVLoaderService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }

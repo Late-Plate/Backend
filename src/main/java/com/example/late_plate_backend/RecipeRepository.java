@@ -16,11 +16,11 @@ import java.util.List;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     Page<Recipe> findAll(Pageable pageable);
 
-    @Query("SELECT r FROM recipe r WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :searchedName, '%'))"
-    )Page<Recipe>findNameContaing(@Param("searchedName") String name,Pageable pageable);
+    @Query("SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :searchedName, '%'))")
+    Page<Recipe>findNameContaining(@Param("searchedName") String name,Pageable pageable);
 
     @Query("SELECT r FROM Recipe r WHERE LOWER(r.ingredients) LIKE LOWER(CONCAT('%', :ingredient, '%'))")
-    List<Recipe> findByIngredientContaining(@Param("ingredient") String ingredient);
+    Page<Recipe> findByIngredientContaining(@Param("ingredient") String ingredient,Pageable pageable);
     @Query("SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :searchTerm, '%')) " +
                   "OR LOWER(r.ingredients) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
     Page<Recipe> searchByNameOrIngredients(@Param("searchTerm") String searchTerm,Pageable pageable);

@@ -14,7 +14,9 @@ import java.util.List;
 @RequestMapping("/recipes")
 public class RecipeController {
     private RecipeService recipeService;
-
+    public RecipeController(RecipeService recipeService){
+        this.recipeService=recipeService;
+    }
     @GetMapping
     public Page<Recipe> getRecipes(
             @RequestParam(defaultValue = "0") int page,
@@ -31,10 +33,12 @@ public class RecipeController {
         return recipeService.getByName(page, size,name);
     }
     @GetMapping("/by-ingredient")
-    public List<Recipe> getIngredients(
+    public Page<Recipe> getIngredients(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
             @RequestParam String ingredient
     ){
-        return recipeService.searchRecipesbyIngredient(ingredient);
+        return recipeService.searchRecipesbyIngredient(page, size, ingredient);
     }
     @GetMapping("/general-search")
     public Page<Recipe> Search(
@@ -44,5 +48,6 @@ public class RecipeController {
     ) {
         return recipeService.searchRecipes(page, size,term);
     }
+
 }
 
